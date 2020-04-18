@@ -94,6 +94,19 @@ class BST{
         return preorderArray
     }
 
+    /**
+     * Calculate height of the tree
+     */
+    heightOfTree(){
+        let height = 0;
+        let currentNode = this.root;
+        if(!currentNode){
+            return height
+        }
+        height = heightHelper(currentNode, height);
+        return height
+    }
+
 }
 
 /**
@@ -144,10 +157,25 @@ const inorderHelper = (node, array) =>{
     }
 }
 
+
+/**
+ * Height of the tree
+ */
+const heightHelper = (node, height) => {
+    if(!node){
+        return 0
+    }
+
+    height = 1 + Math.max(heightHelper(node.left), heightHelper(node.right))
+    return height
+}
+
+
 const tree = new BST()
 tree.insert(10)
 tree.insert(5)
 tree.insert(7)
+tree.insert(8)
 tree.insert(20)
 tree.insert(15)
 tree.insert(30)
@@ -159,3 +187,5 @@ console.log(tree.postorder())
 
 console.log("########INORDER########")
 console.log(tree.inorder())
+
+console.log(tree.heightOfTree())
